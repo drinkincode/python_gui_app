@@ -8,10 +8,13 @@ class Message:
         self.message_type = message_type
 
 
-def player_chat(page: ft.Page, layout: ft.Row):
-    chat = ft.Column(
+
+
+def player_chat(page: ft.Page):
+    border = ft.Column(
         auto_scroll=True
     )
+    chat = ft.ListView(expand=0, spacing=10, padding=20, auto_scroll=True, height=300)
     new_message = ft.TextField()
 
     def on_message(message: Message):
@@ -66,11 +69,10 @@ def player_chat(page: ft.Page, layout: ft.Row):
         controls=[new_message, ft.ElevatedButton("Send", on_click=send_click)],
 
     )
-    
-    player_chat = ft.Column(controls=[chat, chat_bar])
-    layout.controls.append(player_chat)
+    border.controls.append(chat)
+    player_chat = ft.Column(controls=[border, chat_bar])
 
-    return layout
+    return player_chat
     
 
 
