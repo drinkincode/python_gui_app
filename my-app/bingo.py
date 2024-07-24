@@ -1,6 +1,7 @@
 import flet as ft
 import csv
 class Bingo(ft.Stack):
+    # auto sizing branch init
     def __init__(self, page: ft.Page):
         chat_bar_top = 800
         chat_bar_left = 1500
