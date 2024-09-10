@@ -3,8 +3,7 @@ import csv
 class Bingo(ft.Stack):
     # auto sizing branch init
     def __init__(self, page: ft.Page):
-        chat_bar_top = 800
-        chat_bar_left = 1500
+        
         CHIP_TOTAL = 25
         CONTAINER_LENGTH = 50
         
@@ -20,9 +19,6 @@ class Bingo(ft.Stack):
             csvFile = csv.reader(file)
             for line in csvFile:
                     text_list.append(line)
-                    
-        # chip_top = 100
-        # chip_left = (CONTAINER_LEFT + chip_top) * (CHIP_TOTAL // 5)    
         
         def on_click(e):
             
