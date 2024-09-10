@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for my-app-delicate-fire-2653 on 2024-07-23T22:41:03-04:00
+# fly.toml app configuration file generated for my-app-green-cherry-3179 on 2024-07-24T00:19:22-04:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'my-app-delicate-fire-2653'
+app = 'my-app-green-cherry-3179'
 primary_region = 'iad'
 
 [build]
