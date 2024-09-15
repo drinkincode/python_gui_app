@@ -1,7 +1,5 @@
 import flet as ft
 from bingo import Bingo
-# from nav import Nav
-import csv
 from chat import *
 from settings import settings_menu
 
