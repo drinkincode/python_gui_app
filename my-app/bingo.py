@@ -14,7 +14,7 @@ class Bingo(ft.Stack):
         container_top = 50
         curr_container_left = CONTAINER_LEFT
         
-        stack = []
+        self.stack = []
         
         text_list = []
         with open('bingo_words.csv', mode ='r')as file:
@@ -48,7 +48,7 @@ class Bingo(ft.Stack):
                     height=CONTAINER_LENGTH, 
                     border=ft.border.all(1)
                 )
-                stack.append(slot)
+                self.stack.append(slot)
                 slot_text = text_list[count][0]
                 if count < 24:
                     slot_text += ", "
@@ -59,4 +59,9 @@ class Bingo(ft.Stack):
             curr_container_left = CONTAINER_LEFT
             container_top += CONTAINER_LENGTH    
         
-        super().__init__(stack, width=300, height=300)
+        super().__init__(self.stack, width=300, height=300)
+        
+    # def get_contents(self):
+    #     for slot in self.stack:
+    #         print()
+    #     return self.contents_list
