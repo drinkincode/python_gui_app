@@ -3,22 +3,32 @@ from bingo import Bingo
 # from nav import Nav
 import csv
 from chat import *
+def show_notification(page: ft.Page, message: str):
+    snackbar = ft.SnackBar(
+        content=ft.Text(message),
+        action="OK"
+    )
+    page.snack_bar = snackbar
+    snackbar.open = True
+    page.update()
+
+def close_settings(page: ft.Page, settings_dialog: ft.AlertDialog, confirm_dialog: ft.AlertDialog):
+    confirm_dialog.open = False
+    settings_dialog.open = False
+    page.update()
+    show_notification(page, "Settings menu closed successfully.")
+
 def confirm_close(page: ft.Page, settings_dialog: ft.AlertDialog):
     confirm_dialog = ft.AlertDialog(
         title=ft.Text("Confirm Close"),
         content=ft.Text("Are you sure you want to close the settings menu?"),
         actions=[
             ft.TextButton("Yes", on_click=lambda e: close_settings(page, settings_dialog, confirm_dialog)),
-            ft.TextButton("No", on_click=lambda e: confirm_dialog.close())
+            ft.TextButton("No", on_click=lambda e: setattr(confirm_dialog, 'open', False))
         ]
     )
     page.dialog = confirm_dialog
     confirm_dialog.open = True
-    page.update()
-
-def close_settings(page: ft.Page, settings_dialog: ft.AlertDialog, confirm_dialog: ft.AlertDialog):
-    confirm_dialog.close()
-    settings_dialog.close()
     page.update()
 
 def settings_menu(page: ft.Page):
