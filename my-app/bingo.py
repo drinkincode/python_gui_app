@@ -4,6 +4,8 @@ class Bingo(ft.Stack):
     def __init__(self, page: ft.Page):
         chat_bar_top = 800
         chat_bar_left = 1500
+        
+        self.contents_list = []
         CHIP_TOTAL = 25
         CONTAINER_LENGTH = 50
         
@@ -47,6 +49,11 @@ class Bingo(ft.Stack):
                     border=ft.border.all(1)
                 )
                 stack.append(slot)
+                slot_text = text_list[count][0]
+                if count < 24:
+                    slot_text += ", "
+                self.contents_list.append(slot_text)
+                    
                 curr_container_left += CONTAINER_LENGTH
                 count+=1
             curr_container_left = CONTAINER_LEFT

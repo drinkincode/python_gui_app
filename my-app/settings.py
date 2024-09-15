@@ -1,5 +1,5 @@
 import flet as ft
-
+from bingo import Bingo
 def show_notification(page: ft.Page, message: str):
     snackbar = ft.SnackBar(
         content=ft.Text(message),
@@ -28,7 +28,9 @@ def confirm_close(page: ft.Page, settings_dialog: ft.AlertDialog):
     confirm_dialog.open = True
     page.update()
 
-def settings_menu(page: ft.Page):
+def settings_menu(page: ft.Page, bingo_game: Bingo):
+    slots_content = "".join(bingo_game.contents_list)
+    
     settings_dialog = ft.AlertDialog(
         title=ft.Text("Settings"),
         content=ft.Column(
@@ -45,6 +47,15 @@ def settings_menu(page: ft.Page):
                         ft.dropdown.Option("Option C")
                     ],
                     label="Dropdown Menu"
+                ), 
+                ft.Text("Slots Content"),
+                ft.Container(
+                    content=ft.ListView(
+                        controls=[
+                            ft.TextField(value=slots_content, multiline=True)
+                        ],
+                        height=200  # Set the height for the scrollable area
+                    )
                 )
             ]
         ),

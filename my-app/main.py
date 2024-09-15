@@ -5,16 +5,18 @@ from settings import settings_menu
 
 def main(page: ft.Page):
     page.adaptive = True
-
+    
+    bingo_game = Bingo(page)
+    
     nav_bar = ft.Row(
         controls=[
-            ft.ElevatedButton(text="Settings", on_click=lambda e: settings_menu(page)),
+            ft.ElevatedButton(text="Settings", on_click=lambda e: settings_menu(page, bingo_game)),
             ft.ElevatedButton(text="New Game", on_click=lambda e: print("New Game clicked"))
         ],
         alignment=ft.MainAxisAlignment.SPACE_BETWEEN
     )
     page.add(nav_bar)
-    bingo_game = Bingo(page)
+    
     layout = ft.Column(controls = [ft.Column(controls=[bingo_game])])
     chat = player_chat(page)
     layout.controls.append(chat)
