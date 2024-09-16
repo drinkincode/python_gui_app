@@ -8,8 +8,6 @@ class Message:
         self.message_type = message_type
 
 
-
-
 def player_chat(page: ft.Page):
     border = ft.Column(
         auto_scroll=True
@@ -71,7 +69,7 @@ def player_chat(page: ft.Page):
     )
     border.controls.append(chat)
     player_chat = ft.Column(controls=[border, chat_bar])
-
+    player_chat.adaptive = True
     return player_chat
     
 

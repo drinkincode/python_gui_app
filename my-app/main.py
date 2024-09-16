@@ -8,7 +8,7 @@ def main(page: ft.Page):
     page.adaptive = True
     
     bingo_game = Bingo(page)
-    
+    page.bgcolor = ft.colors.GREY_100
     nav_bar = ft.Row(
         controls=[
             ft.ElevatedButton(text="Settings", on_click=lambda e: settings_menu(page, bingo_game)),
