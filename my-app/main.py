@@ -19,6 +19,7 @@ def main(page: ft.Page):
     page.add(nav_bar)
     
     layout = ft.Column(controls = [ft.Column(controls=[bingo_game])])
+    layout.expand = True
     chat = player_chat(page)
     layout.controls.append(chat)
     

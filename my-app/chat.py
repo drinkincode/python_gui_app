@@ -69,7 +69,7 @@ def player_chat(page: ft.Page):
     )
     border.controls.append(chat)
     player_chat = ft.Column(controls=[border, chat_bar])
-    player_chat.adaptive = True
+    player_chat.expand = True
     return player_chat
     
 

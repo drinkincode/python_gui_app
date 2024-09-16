@@ -14,7 +14,6 @@ def new_game_menu(page: ft.Page, bingo_game: Bingo):
             show_notification(page, "Error: The board must have exactly 25 slots.")
             return
         
-        print(new_contents)
         # Save the changes to the bingo game
         bingo_game.update_contents(new_contents)
         # Close the change board dialog
