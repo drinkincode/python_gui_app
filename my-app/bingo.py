@@ -1,5 +1,5 @@
 import flet as ft
-import csv
+from utils.csv_utils import write_csv, read_csv
 class Bingo(ft.Stack):
     def __init__(self, page: ft.Page):
         chat_bar_top = 800
@@ -16,12 +16,8 @@ class Bingo(ft.Stack):
         
         self.stack = []
         
-        text_list = []
-        with open('bingo_words.csv', mode ='r')as file:
-            csvFile = csv.reader(file)
-            for line in csvFile:
-                    text_list.append(line)
-                    
+        text_list = read_csv()[0:CHIP_TOTAL]
+        print(len(text_list))
         # chip_top = 100
         # chip_left = (CONTAINER_LEFT + chip_top) * (CHIP_TOTAL // 5)    
         
@@ -63,16 +59,15 @@ class Bingo(ft.Stack):
         for i in range(len(self.stack)):
             slot = self.stack[i]
             slot_text = slot.content.value
-            if i < len(self.stack) - 1:
-                slot_text = slot_text + ", "
-            
             contents_list.append(slot_text)
             
         return contents_list
     
     def update_contents(self, new_contents: list):
-        super().controls.clear
+        print(new_contents)
+        write_csv(new_contents)
+        print(len(new_contents), len(self.stack))
         for i in range(len(self.stack)):
             self.stack[i].content.value = new_contents[i]
-            super().controls.append(self.stack[i])
         return True
+    

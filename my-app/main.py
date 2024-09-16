@@ -2,6 +2,7 @@ import flet as ft
 from bingo import Bingo
 from chat import *
 from settings import settings_menu
+from new_game import new_game_menu
 
 def main(page: ft.Page):
     page.adaptive = True
@@ -11,7 +12,7 @@ def main(page: ft.Page):
     nav_bar = ft.Row(
         controls=[
             ft.ElevatedButton(text="Settings", on_click=lambda e: settings_menu(page, bingo_game)),
-            ft.ElevatedButton(text="New Game", on_click=lambda e: print("New Game clicked"))
+            ft.ElevatedButton(text="New Game", on_click=lambda e: new_game_menu(page, bingo_game))
         ],
         alignment=ft.MainAxisAlignment.SPACE_BETWEEN
     )
