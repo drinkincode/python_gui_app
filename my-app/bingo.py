@@ -2,13 +2,9 @@ import flet as ft
 from utils.csv_utils import write_csv, read_csv
 class Bingo(ft.Stack):
     def __init__(self, page: ft.Page):
-        chat_bar_top = 800
-        chat_bar_left = 1500
-        
         self.page = page
         CHIP_TOTAL = 25
         CONTAINER_LENGTH = 75
-        # CONTAINER_LENGTH = 50
 
         
         CONTAINER_LEFT = 10
@@ -19,8 +15,6 @@ class Bingo(ft.Stack):
         self.stack = []
         
         text_list = read_csv()[0:CHIP_TOTAL]
-        # chip_top = 100
-        # chip_left = (CONTAINER_LEFT + chip_top) * (CHIP_TOTAL // 5)    
         
         def on_click(e):
             
@@ -53,7 +47,6 @@ class Bingo(ft.Stack):
             container_top += CONTAINER_LENGTH    
         
         super().__init__(self.stack, width=400, height=400)
-        page.pubsub.subscribe(self.update_contents)
         
     def get_contents_list(self):
         contents_list = []
