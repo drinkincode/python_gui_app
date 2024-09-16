@@ -1,9 +1,11 @@
 import flet as ft
-import csv
+from utils.csv_utils import write_csv, read_csv
 class Bingo(ft.Stack):
     def __init__(self, page: ft.Page):
         chat_bar_top = 800
         chat_bar_left = 1500
+        
+        self.page = page
         CHIP_TOTAL = 25
         CONTAINER_LENGTH = 50
         
@@ -12,14 +14,10 @@ class Bingo(ft.Stack):
         container_top = 50
         curr_container_left = CONTAINER_LEFT
         
-        stack = []
+        self.stack = []
         
-        text_list = []
-        with open('bingo_words.csv', mode ='r')as file:
-            csvFile = csv.reader(file)
-            for line in csvFile:
-                    text_list.append(line)
-                    
+        text_list = read_csv()[0:CHIP_TOTAL]
+        print(len(text_list))
         # chip_top = 100
         # chip_left = (CONTAINER_LEFT + chip_top) * (CHIP_TOTAL // 5)    
         
@@ -46,10 +44,30 @@ class Bingo(ft.Stack):
                     height=CONTAINER_LENGTH, 
                     border=ft.border.all(1)
                 )
-                stack.append(slot)
+                self.stack.append(slot)
+                    
                 curr_container_left += CONTAINER_LENGTH
                 count+=1
             curr_container_left = CONTAINER_LEFT
             container_top += CONTAINER_LENGTH    
         
-        super().__init__(stack, width=300, height=300)
+        super().__init__(self.stack, width=300, height=300)
+        
+    def get_contents_list(self):
+        contents_list = []
+        
+        for i in range(len(self.stack)):
+            slot = self.stack[i]
+            slot_text = slot.content.value
+            contents_list.append(slot_text)
+            
+        return contents_list
+    
+    def update_contents(self, new_contents: list):
+        print(new_contents)
+        write_csv(new_contents)
+        print(len(new_contents), len(self.stack))
+        for i in range(len(self.stack)):
+            self.stack[i].content.value = new_contents[i]
+        return True
+    
