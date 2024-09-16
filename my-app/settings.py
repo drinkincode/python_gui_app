@@ -30,16 +30,16 @@ def confirm_close(page: ft.Page, settings_dialog: ft.AlertDialog):
 
 
 def show_change_board_dialog(page: ft.Page, bingo_game: Bingo):
-    slots_content = "\n".join(bingo_game.contents_list)
+    slots_content = "".join(bingo_game.get_contents_list())
     text_field = ft.TextField(value=slots_content, multiline=True)
 
     def save_changes(e):
-        new_contents = text_field.value.split("\n")
+        new_contents = text_field.value.split(", ")
         if len(new_contents) != 25:
             show_notification(page, "Error: The board must have exactly 24 slots.")
             return
         # Save the changes to the bingo game
-        bingo_game.contents_list = new_contents
+        bingo_game.update_contents(new_contents)
         # Close the change board dialog
         change_board_dialog.open = False
         page.update()

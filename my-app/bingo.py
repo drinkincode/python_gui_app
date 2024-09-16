@@ -5,7 +5,7 @@ class Bingo(ft.Stack):
         chat_bar_top = 800
         chat_bar_left = 1500
         
-        self.contents_list = []
+        self.page = page
         CHIP_TOTAL = 25
         CONTAINER_LENGTH = 50
         
@@ -49,10 +49,6 @@ class Bingo(ft.Stack):
                     border=ft.border.all(1)
                 )
                 self.stack.append(slot)
-                slot_text = text_list[count][0]
-                if count < 24:
-                    slot_text += ", "
-                self.contents_list.append(slot_text)
                     
                 curr_container_left += CONTAINER_LENGTH
                 count+=1
@@ -61,7 +57,22 @@ class Bingo(ft.Stack):
         
         super().__init__(self.stack, width=300, height=300)
         
-    # def get_contents(self):
-    #     for slot in self.stack:
-    #         print()
-    #     return self.contents_list
+    def get_contents_list(self):
+        contents_list = []
+        
+        for i in range(len(self.stack)):
+            slot = self.stack[i]
+            slot_text = slot.content.value
+            if i < len(self.stack) - 1:
+                slot_text = slot_text + ", "
+            
+            contents_list.append(slot_text)
+            
+        return contents_list
+    
+    def update_contents(self, new_contents: list):
+        super().controls.clear
+        for i in range(len(self.stack)):
+            self.stack[i].content.value = new_contents[i]
+            super().controls.append(self.stack[i])
+        return True
